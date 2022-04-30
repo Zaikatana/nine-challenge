@@ -6,6 +6,7 @@ import { Tag, TagInformation } from "../types/tags.types";
 export class ArticleStorage {
   static articles: Map<string, Article> = new Map();
   static tagArticles: Map<Tag, string[]> = new Map();
+  static dateArticles: Map<string, string[]> = new Map();
 
   static getArticleById = (id: string): Article => {
     if (!this.articles.get(id)) {
@@ -25,12 +26,13 @@ export class ArticleStorage {
       throw Errors.INVALID_TAG;
     }
 
-    const articles: string[] = [];
+    // Generate Related Tags & count
     const relatedTags: Map<string, boolean> = new Map();
+    let count = 0;
     relatedArticles.forEach((articleId) => {
       const article = this.articles.get(articleId);
       if (article!.date === date) {
-        articles.push(articleId);
+        count += 1;
         article!.tags.forEach((tag) => {
           if (tag !== tagName && !relatedTags.get(tag)) {
             relatedTags.set(tag, true);
@@ -39,9 +41,15 @@ export class ArticleStorage {
       }
     });
 
+    // TODO: Generate Articles so that the last 10 are retrieved
+    const articles: string[] | undefined = this.dateArticles.get(date);
+    if (!articles) {
+      throw Errors.ARTICLE_DATE_ERROR;
+    }
+
     const tagInformation = {
       tag: tagName,
-      count: articles.length,
+      count,
       articles,
       related_tags: Array.from(relatedTags.keys()),
     };
@@ -60,6 +68,14 @@ export class ArticleStorage {
         this.tagArticles.set(tag, [id]);
       }
     });
+    const date = data.date;
+    if (this.dateArticles.get(date)) {
+      const dateArticlesArr = this.dateArticles.get(date);
+      dateArticlesArr!.push(id);
+      this.dateArticles.set(date, dateArticlesArr!);
+    } else {
+      this.dateArticles.set(date, [id]);
+    }
   };
 
   static getSize = (): number => {

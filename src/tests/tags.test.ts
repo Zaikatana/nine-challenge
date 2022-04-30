@@ -25,12 +25,12 @@ describe("/articles Test Cases", () => {
       const resData = res.body;
       expect(resData.tag).toBe("tagA");
       expect(resData.count).toBe(2);
-      expect(resData.articles).toHaveLength(2);
-      expect(resData.articles[0]).toBe("5");
-      expect(resData.articles[1]).toBe("6");
+      expect(resData.articles).toHaveLength(3);
+      expect(resData.articles).toEqual(["4", "5", "6"]);
       expect(resData.related_tags).toHaveLength(2);
-      expect(resData.related_tags[0]).toBe("tagB");
-      expect(resData.related_tags[1]).toBe("tagC");
+      expect(resData.related_tags).toEqual(
+        expect.arrayContaining(["tagB", "tagC"])
+      );
     });
 
     it("should return an error message if an invalid tag is provided", async () => {

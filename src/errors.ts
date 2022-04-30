@@ -6,6 +6,7 @@ export enum Errors {
   INVALID_TAG = "Invalid Tag",
   INVALID_DATE = "Invalid Date",
   INVALID_PATH = "Invalid Path",
+  ARTICLE_DATE_ERROR = "No Articles found for Date",
 }
 
 // Validates the schema of a Request body, Returns a 400 response if the request does not match schema
