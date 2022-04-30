@@ -24,9 +24,20 @@ describe("/articles Test Cases", () => {
       expect(res.statusCode).toBe(200);
       const resData = res.body;
       expect(resData.tag).toBe("tagA");
-      expect(resData.count).toBe(2);
-      expect(resData.articles).toHaveLength(3);
-      expect(resData.articles).toEqual(["4", "5", "6"]);
+      expect(resData.count).toBe(8);
+      expect(resData.articles).toHaveLength(10);
+      expect(resData.articles).toEqual([
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+      ]);
       expect(resData.related_tags).toHaveLength(2);
       expect(resData.related_tags).toEqual(
         expect.arrayContaining(["tagB", "tagC"])

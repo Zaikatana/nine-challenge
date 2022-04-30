@@ -42,4 +42,4 @@ Below are the major assumptions made whilst working with the spec provided.
     - Date parameter provided is in the format YYYYMMDD.
     - If an invalid date/invalid date format is provided, a 400 response is thrown with an Invalid Date error.
     - Minimum and Maximum date were unknown, I've assumed that there was no limit for this.
-    - For Articles, if 12 articles were created at the same time, then 10 of those 12 articles will be returned to fit the 10 article requirement
+    - For Articles, if 12 articles were created at the same time, then the last 10 of those 12 articles will be returned to fit the 10 article requirement

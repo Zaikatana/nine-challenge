@@ -4,8 +4,11 @@ import { Tag, TagInformation } from "../types/tags.types";
 
 // Article Storage Service for virtual storage of Articles
 export class ArticleStorage {
+  // Stores all Articles, with ID as a key
   static articles: Map<string, Article> = new Map();
+  // Stores list of article IDs that are associated with a tag
   static tagArticles: Map<Tag, string[]> = new Map();
+  // Stores list of article IDs that are associated with a date
   static dateArticles: Map<string, string[]> = new Map();
 
   static getArticleById = (id: string): Article => {
@@ -26,7 +29,7 @@ export class ArticleStorage {
       throw Errors.INVALID_TAG;
     }
 
-    // Generate Related Tags & count
+    // Generate Related Tags & Count
     const relatedTags: Map<string, boolean> = new Map();
     let count = 0;
     relatedArticles.forEach((articleId) => {
@@ -41,7 +44,7 @@ export class ArticleStorage {
       }
     });
 
-    // Retrieves all articles that were made for provided date
+    // Retrieves all article IDs that were made for provided date
     const articles: string[] | undefined = this.dateArticles.get(date);
     if (!articles) {
       throw Errors.ARTICLE_DATE_ERROR;

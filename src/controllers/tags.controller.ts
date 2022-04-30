@@ -11,6 +11,7 @@ const getTags = (req: Request, res: Response) => {
     }
 
     const tagName: string = req.params.tagName;
+    // Convert YYYYMMDD date to YYYY-MM-DD
     const date: string = moment(req.params.date, "YYYYMMDD").format(
       "YYYY-MM-DD"
     );

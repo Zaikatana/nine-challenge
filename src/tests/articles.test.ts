@@ -57,7 +57,7 @@ describe("/articles Test Cases", () => {
       expect(res).toBeDefined();
       expect(res.statusCode).toBe(200);
       const resData = res.body;
-      expect(resData.id).toBe("7")
+      expect(resData.id).toBe("16")
     });
 
     it("should return an error message if a blank body is provided", async () => {
