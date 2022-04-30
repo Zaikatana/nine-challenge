@@ -9,7 +9,7 @@ export class ArticleStorage {
   static articles: Map<string, Article> = new Map();
   static tagArticles: Map<Tag, string[]> = new Map();
 
-  static getArticleById = (id: string): Article => {
+  static getArticleById = (id: string): Article | undefined => {
     return this.articles.get(id);
   };
 
@@ -17,7 +17,9 @@ export class ArticleStorage {
     tagName: string,
     date: string
   ): TagInformation => {
-    const relatedArticles: string[] = this.tagArticles.get(tagName as Tag);
+    const relatedArticles: string[] | undefined = this.tagArticles.get(
+      tagName as Tag
+    );
     if (!relatedArticles) {
       throw ArticleStorageErrors.INVALID_TAG;
     }
@@ -27,11 +29,11 @@ export class ArticleStorage {
     // TODO: Try to find O(n) method or better to do this...
     relatedArticles.forEach((articleId) => {
       const article = this.articles.get(articleId);
-      if (article.date === date) {
+      if (article!.date === date) {
         articles.push(articleId);
       }
 
-      article.tags.forEach((tag) => {
+      article!.tags.forEach((tag) => {
         if (tag !== tagName && !relatedTags.get(tag)) {
           relatedTags.set(tag, true);
         }
@@ -52,9 +54,9 @@ export class ArticleStorage {
     this.articles.set(id, data);
     data.tags.forEach((tag) => {
       if (this.tagArticles.get(tag)) {
-        const tagArticlesArr: string[] = this.tagArticles.get(tag);
-        tagArticlesArr.push(id);
-        this.tagArticles.set(tag, tagArticlesArr);
+        const tagArticlesArr = this.tagArticles.get(tag);
+        tagArticlesArr!.push(id);
+        this.tagArticles.set(tag, tagArticlesArr!);
       } else {
         this.tagArticles.set(tag, [id]);
       }

@@ -5,14 +5,14 @@ import {
   ArticlePOSTRes,
 } from "../types/articles.type";
 import { Request, Response } from "express";
-import * as moment from "moment";
+import moment from "moment";
 import { ArticleStorage } from "../services/ArticleStorage";
 import { Errors } from "./helpers";
 
 const getArticle = (req: Request, res: Response) => {
   try {
     const id: string = req.params.id;
-    const article: ArticleGETRes = ArticleStorage.getArticleById(id);
+    const article = ArticleStorage.getArticleById(id);
     if (!article) {
       throw Errors.INVALID_ARTICLE_ID;
     }

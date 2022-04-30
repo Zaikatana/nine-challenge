@@ -1,5 +1,5 @@
 import { createServer } from "http";
-import * as express from "express";
+import express from "express";
 import articlesRoutes from "./routes/articles.route";
 import tagsRoutes from "./routes/tags.route"
 
@@ -32,14 +32,16 @@ router.use("/tags", tagsRoutes);
 
 
 router.use((req, res, next) => {
-  const error = new Error("Path not");
+  const error = new Error("Path not found!");
   return res.status(404).json({
     error: error.message,
   });
 });
 
-const httpServer = createServer(router);
+const server = createServer(router);
 const PORT: any = process.env.PORT ?? 6060;
-httpServer.listen(PORT, () =>
+server.listen(PORT, () =>
   console.log(`The server is running on port ${PORT}`)
 );
+
+export default server;

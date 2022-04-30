@@ -19,4 +19,8 @@ export type ArticlePOSTRes = {
   id: string;
 };
 
+export type ArticleGETReqParams = {
+  id: string;
+}
+
 export type ArticleGETRes = Article;

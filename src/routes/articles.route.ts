@@ -1,10 +1,11 @@
 import { Router } from "express";
 import articlesController from "../controllers/articles.controller";
+import { ArticleGETReqParams, ArticleGETRes, ArticlePOSTRes } from "../types/articles.type";
 
 const router = Router();
 
-router.get("/:id", articlesController.getArticle);
+router.get<ArticleGETReqParams, ArticleGETRes>("/:id", articlesController.getArticle);
 
-router.post("/", articlesController.postArticle);
+router.post<{}, ArticlePOSTRes>("/", articlesController.postArticle);
 
 export default router;

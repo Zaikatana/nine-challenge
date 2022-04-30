@@ -7,4 +7,9 @@ export type TagInformation = {
   related_tags: Tag[];
 };
 
+export type TagGETReqParams = {
+  tagName: string;
+  date: string;
+};
+
 export type TagGETRes = TagInformation;

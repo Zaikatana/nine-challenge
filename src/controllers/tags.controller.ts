@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import * as moment from "moment";
+import moment from "moment";
 import { ArticleStorage } from "../services/ArticleStorage";
 import { TagGETRes } from "../types/tags.types";
 import { Errors } from "./helpers";
 
 const getTags = (req: Request, res: Response) => {
   try {
-    // TODO: Check Params
+    if (!moment(req.params.date, "YYYYMMDD").isValid()) {
+      throw Errors.INVALID_DATE;
+    }
+
     const tagName: string = req.params.tagName;
     const date: string = moment(req.params.date, "YYYYMMDD").format(
       "YYYY-MM-DD"
