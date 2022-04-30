@@ -1,16 +1,17 @@
+import { Errors } from "../errors";
 import { Article } from "../types/articles.type";
 import { Tag, TagInformation } from "../types/tags.types";
 
-enum ArticleStorageErrors {
-  INVALID_TAG = "Invalid Tag",
-}
-
+// Article Storage Service for virtual storage of Articles
 export class ArticleStorage {
   static articles: Map<string, Article> = new Map();
   static tagArticles: Map<Tag, string[]> = new Map();
 
-  static getArticleById = (id: string): Article | undefined => {
-    return this.articles.get(id);
+  static getArticleById = (id: string): Article => {
+    if (!this.articles.get(id)) {
+      throw Errors.INVALID_ARTICLE_ID;
+    }
+    return this.articles.get(id)!;
   };
 
   static getTagByNameAndDate = (
@@ -21,12 +22,11 @@ export class ArticleStorage {
       tagName as Tag
     );
     if (!relatedArticles) {
-      throw ArticleStorageErrors.INVALID_TAG;
+      throw Errors.INVALID_TAG;
     }
 
     const articles: string[] = [];
     const relatedTags: Map<string, boolean> = new Map();
-    // TODO: Try to find O(n) method or better to do this...
     relatedArticles.forEach((articleId) => {
       const article = this.articles.get(articleId);
       if (article!.date === date) {

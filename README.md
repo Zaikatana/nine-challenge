@@ -10,6 +10,7 @@ This is my solution for the the Article API Coding Challenge. Written in primari
 The following API endpoints are available to be called either with POSTman or curl:
 - `POST /articles`
 Handles the receipt of some article data in json format, and store it within the service.
+
 **Example Request**
 ```
 {
@@ -18,6 +19,7 @@ Handles the receipt of some article data in json format, and store it within the
   "tags": ["health", "fitness","science"]
 }
 ```
+
 **Example Response**
 ```
 {
@@ -28,6 +30,7 @@ Handles the receipt of some article data in json format, and store it within the
 
 - `GET /articles/{id}`
 Returns the JSON representation of an article.
+
 **Example Response**
 ```
 {
@@ -41,11 +44,12 @@ Returns the JSON representation of an article.
 
 - `GET /tags/{tagName}/{date}`
 Returns the list of articles that have that tag name on the given date and some summary data about that tag for that day. Date is in the format YYYYMMDD.
+
 **Example Response**
 ```
 {
   "tag" : "health",
-  "count" : 17,
+  "count" : 2,
     "articles" :
       [
         "1",

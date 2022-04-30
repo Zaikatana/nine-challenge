@@ -2,6 +2,7 @@ import { createServer } from "http";
 import express from "express";
 import articlesRoutes from "./routes/articles.route";
 import tagsRoutes from "./routes/tags.route"
+import { Errors } from "./errors";
 
 const router: express.Express = express();
 
@@ -30,14 +31,15 @@ router.use((req, res, next) => {
 router.use("/articles", articlesRoutes);
 router.use("/tags", tagsRoutes);
 
-
+// Set behaviour for invalid URLs
 router.use((req, res, next) => {
-  const error = new Error("Path not found!");
+  const error = new Error(Errors.INVALID_PATH);
   return res.status(404).json({
     error: error.message,
   });
 });
 
+// Initialise Server
 const server = createServer(router);
 const PORT: any = process.env.PORT ?? 6060;
 server.listen(PORT, () =>
