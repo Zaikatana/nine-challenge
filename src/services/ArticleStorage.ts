@@ -41,7 +41,7 @@ export class ArticleStorage {
       }
     });
 
-    // TODO: Generate Articles so that the last 10 are retrieved
+    // Retrieves all articles that were made for provided date
     const articles: string[] | undefined = this.dateArticles.get(date);
     if (!articles) {
       throw Errors.ARTICLE_DATE_ERROR;
@@ -50,7 +50,8 @@ export class ArticleStorage {
     const tagInformation = {
       tag: tagName,
       count,
-      articles,
+      // Return last 10 items in articles array
+      articles: articles.slice(articles.length - 10),
       related_tags: Array.from(relatedTags.keys()),
     };
 
