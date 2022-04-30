@@ -20,7 +20,12 @@ export const articlePOSTReqSchema = {
   properties: {
     title: { type: "string", minLength: 1 },
     body: { type: "string", minLength: 1 },
-    tags: { type: "array", uniqueItems: true, minItems: 1 },
+    tags: {
+      type: "array",
+      uniqueItems: true,
+      minItems: 1,
+      items: { type: "string", minLength: 1 },
+    },
   },
   required: ["title", "body", "tags"],
   additionalProperties: false,

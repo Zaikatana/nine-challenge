@@ -23,7 +23,6 @@ Handles the receipt of some article data in json format, and store it within the
 **Example Response**
 ```
 {
-  "success": true,
   "id": "1"
 }
 ```

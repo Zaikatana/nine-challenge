@@ -31,13 +31,12 @@ export class ArticleStorage {
       const article = this.articles.get(articleId);
       if (article!.date === date) {
         articles.push(articleId);
+        article!.tags.forEach((tag) => {
+          if (tag !== tagName && !relatedTags.get(tag)) {
+            relatedTags.set(tag, true);
+          }
+        });
       }
-
-      article!.tags.forEach((tag) => {
-        if (tag !== tagName && !relatedTags.get(tag)) {
-          relatedTags.set(tag, true);
-        }
-      });
     });
 
     const tagInformation = {
