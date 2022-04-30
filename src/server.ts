@@ -26,13 +26,15 @@ router.use((req, res, next) => {
   next();
 });
 
+// Set Routes
 router.use("/articles", articlesRoutes);
 router.use("/tags", tagsRoutes);
 
+
 router.use((req, res, next) => {
-  const error = new Error("not found");
+  const error = new Error("Path not");
   return res.status(404).json({
-    message: error.message,
+    error: error.message,
   });
 });
 
