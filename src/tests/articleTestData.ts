@@ -39,7 +39,7 @@ export const testArticles: Article[] = [
     title:
       "test 4",
     body: "test body 4",
-    tags: ["tagB", "tagC"],
+    tags: ["tagA", "tagB", "tagC"],
   },
   {
     id: "5",
@@ -63,7 +63,7 @@ export const testArticles: Article[] = [
     title:
       "test 7",
     body: "test body 7",
-    tags: ["tagB", "tagC"],
+    tags: ["tagA", "tagB", "tagC"],
   },
   {
     id: "8",
@@ -87,7 +87,7 @@ export const testArticles: Article[] = [
     title:
       "test 10",
     body: "test body 10",
-    tags: ["tagB", "tagC"],
+    tags: ["tagA", "tagB", "tagC"],
   },
   {
     id: "11",
@@ -111,7 +111,7 @@ export const testArticles: Article[] = [
     title:
       "test 13",
     body: "test body 13",
-    tags: ["tagB", "tagC"],
+    tags: ["tagA", "tagB", "tagC"],
   },
   {
     id: "14",

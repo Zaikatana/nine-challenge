@@ -1,8 +1,9 @@
 # Channel Nine Coding Challenge
 
-This is my solution for the the Article API Coding Challenge. Written in primarily in TypeScript.
+This is my solution for the the Article API Coding Challenge. Written in primarily in TypeScript hosted in NodeJS.
 
 ## Installation & Running
+Prereq: Requires Yarn or Node to be installed
 1. Run `yarn install` or `npm install`
 2. Run `yarn start` or `npm start` on Mac/Unix/Windows
 

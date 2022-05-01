@@ -8,6 +8,7 @@ export type Article = {
   tags: Tag[];
 };
 
+// POST /articles request body
 export type ArticlePOSTReq = {
   title: string;
   body: string;
@@ -31,12 +32,15 @@ export const articlePOSTReqSchema = {
   additionalProperties: false,
 };
 
+// POST /articles response body
 export type ArticlePOSTRes = {
   id: string;
 };
 
+// GET /articles request parameters
 export type ArticleGETReqParams = {
   id: string;
 };
 
+// GET /articles response body
 export type ArticleGETRes = Article;

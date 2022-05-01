@@ -8,8 +8,6 @@ export class ArticleStorage {
   static articles: Map<string, Article> = new Map();
   // Stores list of article IDs that are associated with a tag
   static tagArticles: Map<Tag, string[]> = new Map();
-  // Stores list of article IDs that are associated with a date
-  static dateArticles: Map<string, string[]> = new Map();
 
   static getArticleById = (id: string): Article => {
     if (!this.articles.get(id)) {
@@ -29,13 +27,13 @@ export class ArticleStorage {
       throw Errors.INVALID_TAG;
     }
 
-    // Generate Related Tags & Count
+    // Generate Articles, Related Tags & Count
     const relatedTags: Map<string, boolean> = new Map();
-    let count = 0;
+    const articles: string[] = [];
     relatedArticles.forEach((articleId) => {
       const article = this.articles.get(articleId);
       if (article!.date === date) {
-        count += 1;
+        articles.push(article!.id);
         article!.tags.forEach((tag) => {
           if (tag !== tagName && !relatedTags.get(tag)) {
             relatedTags.set(tag, true);
@@ -44,15 +42,9 @@ export class ArticleStorage {
       }
     });
 
-    // Retrieves all article IDs that were made for provided date
-    const articles: string[] | undefined = this.dateArticles.get(date);
-    if (!articles) {
-      throw Errors.ARTICLE_DATE_ERROR;
-    }
-
     const tagInformation = {
       tag: tagName,
-      count,
+      count: articles.length,
       // Return last 10 items in articles array
       articles: articles.slice(articles.length - 10),
       related_tags: Array.from(relatedTags.keys()),
@@ -72,14 +64,6 @@ export class ArticleStorage {
         this.tagArticles.set(tag, [id]);
       }
     });
-    const date = data.date;
-    if (this.dateArticles.get(date)) {
-      const dateArticlesArr = this.dateArticles.get(date);
-      dateArticlesArr!.push(id);
-      this.dateArticles.set(date, dateArticlesArr!);
-    } else {
-      this.dateArticles.set(date, [id]);
-    }
   };
 
   static getSize = (): number => {

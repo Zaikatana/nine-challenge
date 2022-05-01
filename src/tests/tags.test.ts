@@ -24,7 +24,7 @@ describe("/articles Test Cases", () => {
       expect(res.statusCode).toBe(200);
       const resData = res.body;
       expect(resData.tag).toBe("tagA");
-      expect(resData.count).toBe(8);
+      expect(resData.count).toBe(12);
       expect(resData.articles).toHaveLength(10);
       expect(resData.articles).toEqual([
         "6",

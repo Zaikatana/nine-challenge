@@ -22,6 +22,7 @@ Below are the major assumptions made whilst working with the spec provided.
     - Validations would only be performed to ensure 2 articles will not have the same ID. I have made it so that 2 Articles can share the same title, body and tags.
     - All tags are unique, of type string and not empty. Validation is in place to ensure this.
     - Title and Body are strings. Validation is in place to ensure this.
+    - Title, body and tags are required fields
     
 - `GET /articles/{id}`
     - Response body was not defined, thus I used the following schema for the response which I believe is an appropriate JSON representation of an Article
@@ -42,4 +43,5 @@ Below are the major assumptions made whilst working with the spec provided.
     - Date parameter provided is in the format YYYYMMDD.
     - If an invalid date/invalid date format is provided, a 400 response is thrown with an Invalid Date error.
     - Minimum and Maximum date were unknown, I've assumed that there was no limit for this.
-    - For Articles, if 12 articles were created at the same time, then the last 10 of those 12 articles will be returned to fit the 10 article requirement
+    - For Articles, if 12 articles were created at the same time, then the last 10 of those 12 articles will be returned to fit the 10 article requirement.
+    - There had seemed to be a conflicting requirement in the spec. Where GET /tags "will return the list of articles that have that tag name" and within the response, the articles array "contains a list of ids for the last 10 articles entered for that day", which implied that the tag did not matter. I have developed the endpoint to cover the former requirement as it logically made more sense to return articles which were related to the tagName and date.
